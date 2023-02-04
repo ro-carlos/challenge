@@ -25,6 +25,10 @@ public class BasePage {
 		PageFactory.initElements(this.driver, this);
 	}
 
+	public String getUrl(){
+		return getDriver().getCurrentUrl();
+	}
+
 	protected WebDriver getDriver() {
 		return driver;
 	}
