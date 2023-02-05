@@ -47,7 +47,7 @@ public class HomePageNavbar extends BasePage {
 	public void openTalentIntelligenceSubMenu(TalentIntelligenceNavbarSubMenu submenu){
 		var menuLocator = webMenu.get(NavbarMenu.TALENT_INTELLIGENCE);
 		var subMenuLocator = getLocator(WEB_SUB_MENU_TEMPLATE, submenu.getName());
-		if(isResponsive()){
+		if(!isWebResponsive()){
 			menuLocator = mobileMenu.get(NavbarMenu.TALENT_INTELLIGENCE);
 			subMenuLocator = getLocator(MOBILE_SUB_MENU_TEMPLATE, submenu.getName());
 			getActions().waitAndClick(getMobileMenuLocator());
@@ -61,5 +61,4 @@ public class HomePageNavbar extends BasePage {
 	private By getLocator(String template, String menu) {
 		return By.xpath(String.format(template, menu));
 	}
-
 }

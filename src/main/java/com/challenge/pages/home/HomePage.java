@@ -10,11 +10,19 @@ import com.challenge.pages.BasePage;
 
 public class HomePage extends BasePage {
 
+	@FindBy(css = ".site-logo > a")
+	private WebElement logo;
+
 	@FindBy(css="#site-header div.site-logo > span")
 	private WebElement title;
 
 	public HomePage(WebDriver driver, WebDriverWait wait) {
 		super(driver, wait);
+	}
+
+	@Override
+	protected void pageLoadedElement() {
+		getActions().waitElementForVisibility(logo);
 	}
 
 	public String getTitle(){

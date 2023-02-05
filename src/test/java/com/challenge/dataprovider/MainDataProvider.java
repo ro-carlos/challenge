@@ -14,7 +14,7 @@ public class MainDataProvider {
 				{ TalentIntelligenceNavbarSubMenu.TECHNOLOGIES, "https://www.randallreilly.com/talent-intelligence/stratas/" },
 				{ TalentIntelligenceNavbarSubMenu.TALENT_PARTNERS, "https://www.randallreilly.com/talent-intelligence/recruiting-services/" },
 				{ TalentIntelligenceNavbarSubMenu.STRATEGIC_RESULTS, "https://www.randallreilly.com/talent-intelligence/recruiting-campaigns/" },
-				{ TalentIntelligenceNavbarSubMenu.QUALITY_APPLICANTS, "https://www.randallreilly.com/talent-intelligence/driver-media/" },
+				{ TalentIntelligenceNavbarSubMenu.QUALITY_APPLICANTS, "https://www.randallreilly.com/talent-intelligence/driver-media/" }
 		};
 	}
 }

@@ -7,10 +7,10 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
+import org.testng.xml.XmlSuite;
 
 import com.challenge.driver.*;
 import com.challenge.driver.factory.WebDriverFactory;
-import com.challenge.pages.home.HomePage;
 import com.challenge.utils.Browser;
 import com.challenge.utils.PropertiesReader;
 
@@ -18,48 +18,48 @@ import com.challenge.utils.PropertiesReader;
 public class BaseTest {
 
 	private Browser browser = Browser.CHROME;
-	private WebDriverWait wait;
+	private static ThreadLocal<WebDriverWait> waitThreadLocal = new ThreadLocal<>();;
+	//private WebDriverWait wait;
 	private final PropertiesReader propertiesReader = PropertiesReader.getInstance();
 	private final Logger logger = LogManager.getLogger();
 
-	@BeforeSuite
+	@BeforeSuite(alwaysRun = true)
 	public void setup(ITestContext context) {
 		if (propertiesReader.getProperty("browser").equals("firefox")) {
 			browser = Browser.FIREFOX;
 		}
-		context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(5);
-		getLogger().info("ThreadId: " + Thread.currentThread().getId());
+		context.getCurrentXmlTest().getSuite().setParallel(XmlSuite.ParallelMode.METHODS);
+		context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(Integer.parseInt(propertiesReader.getProperty("threads")));
+		getLogger().info("Setup Suite ThreadId: " + Thread.currentThread().getId());
 	}
 
-	@BeforeMethod
-	public void parallelismSetup() throws Exception {
-		getLogger().info("ThreadId: " + Thread.currentThread().getId());
+	@BeforeMethod(alwaysRun = true)
+	public void setUpSuite() throws Exception {
+		getLogger().info("Setup Method ThreadId: " + Thread.currentThread().getId());
 		getLogger().info("Setting up browser");
 
-		CurrentWebDriver currentWebDriver = CurrentWebDriver.getInstance();
-		currentWebDriver.setWebDriver(WebDriverFactory.getDriver(browser));
-
-		wait = new WebDriverWait(currentWebDriver.getWebDriver(),
-				Duration.ofSeconds(Long.parseLong(propertiesReader.getProperty("timeout"))));
-		currentWebDriver.getWebDriver().manage().window().maximize();
-		currentWebDriver.getWebDriver().get(propertiesReader.getProperty("baseUrl"));
+		CurrentWebDriver.getInstance().setWebDriver(WebDriverFactory.getDriver(browser));
+		waitThreadLocal.set(new WebDriverWait(CurrentWebDriver.getInstance().getWebDriver(),
+				Duration.ofSeconds(Long.parseLong(propertiesReader.getProperty("timeout")))));
+		CurrentWebDriver.getInstance().getWebDriver().manage().window().maximize();
+		CurrentWebDriver.getInstance().getWebDriver().get(propertiesReader.getProperty("baseUrl"));
 	}
 
 	@AfterMethod(alwaysRun = true)
 	public void tearDown() {
 		getLogger().info("Closing browser");
-		if(CurrentWebDriver.getInstance().getWebDriver() != null){
+		getLogger().info("TearDown ThreadId: " + Thread.currentThread().getId());
+		if (CurrentWebDriver.getInstance().getWebDriver() != null) {
 			CurrentWebDriver.getInstance().getWebDriver().quit();
 			CurrentWebDriver.getInstance().removeWebDriver();
 		}
 	}
 
-	protected WebDriverWait getWait(){
-		return wait;
+	protected WebDriverWait getWait() {
+		return waitThreadLocal.get();
 	}
 
 	protected Logger getLogger() {
 		return logger;
 	}
-
 }
