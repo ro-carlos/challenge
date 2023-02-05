@@ -5,50 +5,57 @@ import java.time.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 
-import com.challenge.driver.Browser;
-import com.challenge.driver.MyDriver;
+import com.challenge.driver.*;
+import com.challenge.driver.factory.WebDriverFactory;
 import com.challenge.pages.home.HomePage;
+import com.challenge.utils.Browser;
 import com.challenge.utils.PropertiesReader;
 
 
 public class BaseTest {
 
-	private final PropertiesReader propertiesReader = PropertiesReader.getInstance();
-	private MyDriver myDriver;
+	private Browser browser = Browser.CHROME;
 	private WebDriverWait wait;
+	private final PropertiesReader propertiesReader = PropertiesReader.getInstance();
 	private final Logger logger = LogManager.getLogger();
-	private HomePage homePage;
 
 	@BeforeSuite
-	public void setup() {
-		Browser browser = Browser.CHROME;
+	public void setup(ITestContext context) {
 		if (propertiesReader.getProperty("browser").equals("firefox")) {
 			browser = Browser.FIREFOX;
 		}
-		getLogger().info("Setting up browser");
-		myDriver = new MyDriver(browser);
-		wait = new WebDriverWait(myDriver.getWebDriver(),
-				Duration.ofSeconds(Long.parseLong(propertiesReader.getProperty("timeout"))));
-		myDriver.getWebDriver().manage().window().maximize();
-		homePage = new HomePage(myDriver.getWebDriver(), wait);
+		context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(5);
+		getLogger().info("ThreadId: " + Thread.currentThread().getId());
 	}
 
 	@BeforeMethod
-	public void goHome() {
-		getLogger().info("Navigating to home page");
-		myDriver.getWebDriver().get(propertiesReader.getProperty("baseUrl"));
+	public void parallelismSetup() throws Exception {
+		getLogger().info("ThreadId: " + Thread.currentThread().getId());
+		getLogger().info("Setting up browser");
+
+		CurrentWebDriver currentWebDriver = CurrentWebDriver.getInstance();
+		currentWebDriver.setWebDriver(WebDriverFactory.getDriver(browser));
+
+		wait = new WebDriverWait(currentWebDriver.getWebDriver(),
+				Duration.ofSeconds(Long.parseLong(propertiesReader.getProperty("timeout"))));
+		currentWebDriver.getWebDriver().manage().window().maximize();
+		currentWebDriver.getWebDriver().get(propertiesReader.getProperty("baseUrl"));
 	}
 
-	@AfterSuite(alwaysRun = true)
+	@AfterMethod(alwaysRun = true)
 	public void tearDown() {
 		getLogger().info("Closing browser");
-		myDriver.getWebDriver().quit();
+		if(CurrentWebDriver.getInstance().getWebDriver() != null){
+			CurrentWebDriver.getInstance().getWebDriver().quit();
+			CurrentWebDriver.getInstance().removeWebDriver();
+		}
 	}
 
-	public HomePage getHomePage() {
-		return homePage;
+	protected WebDriverWait getWait(){
+		return wait;
 	}
 
 	protected Logger getLogger() {

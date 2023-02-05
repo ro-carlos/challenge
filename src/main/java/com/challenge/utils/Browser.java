@@ -1,4 +1,4 @@
-package com.challenge.driver;
+package com.challenge.utils;
 
 public enum Browser {
 	FIREFOX, CHROME

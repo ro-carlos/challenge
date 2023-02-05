@@ -1,4 +1,4 @@
-package com.challenge.tests.dataprovider;
+package com.challenge.dataprovider;
 
 import org.testng.annotations.DataProvider;
 
@@ -7,7 +7,7 @@ import com.challenge.pages.menu.TalentIntelligenceNavbarSubMenu;
 
 public class MainDataProvider {
 
-	@DataProvider (name = "menuWithUrlsDataProvider", parallel = false)
+	@DataProvider (name = "menuWithUrlsDataProvider", parallel = true)
 	public static Object[][] menuWithUrlsDataProvider() {
 		return new Object [][] {
 				{ TalentIntelligenceNavbarSubMenu.OVERVIEW, "https://www.randallreilly.com/talent-intelligence/" },
