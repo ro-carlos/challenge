@@ -17,4 +17,11 @@ public class MainDataProvider {
 				{ TalentIntelligenceNavbarSubMenu.QUALITY_APPLICANTS, "https://www.randallreilly.com/talent-intelligence/driver-media/" }
 		};
 	}
+
+	@DataProvider (name = "codingChallengeDataProvider", parallel = true)
+	public static Object[][] codingChallengeDataProvider() {
+		return new Object [][] {
+				{ "Thanks", "For", "Attempting", "A", "Randall", "Reilly", "Coding", "Challenge" }
+		};
+	}
 }
