@@ -6,6 +6,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.challenge.pages.BasePage;
+import com.challenge.report.ExtentReportsManager;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 
 public class HomePage extends BasePage {
@@ -16,8 +19,8 @@ public class HomePage extends BasePage {
 	@FindBy(css="#site-header div.site-logo > span")
 	private WebElement title;
 
-	public HomePage(WebDriver driver, WebDriverWait wait) {
-		super(driver, wait);
+	public HomePage(WebDriver driver, WebDriverWait wait, ExtentTest reportsLogger) {
+		super(driver, wait, reportsLogger);
 	}
 
 	@Override
@@ -27,10 +30,12 @@ public class HomePage extends BasePage {
 
 	public String getTitle(){
 		getLogger().info("Returning home page title");
+		getReportsLogger().log(LogStatus.INFO,"Returning home page title");
 		return getActions().getText(title);
 	}
 
 	public HomePageNavbar getNavbar(){
-		return new HomePageNavbar(getDriver(), getWait());
+		getReportsLogger().log(LogStatus.INFO,"Getting home page navbar");
+		return new HomePageNavbar(getDriver(), getWait(), getReportsLogger());
 	}
 }

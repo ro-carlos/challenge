@@ -15,7 +15,7 @@ public class HomeTest extends BaseTest {
 
 	@Test
 	public void verifyTitlePageTest() {
-		final HomePage homePage = new HomePage(CurrentWebDriver.getInstance().getWebDriver(), getWait());
+		final HomePage homePage = new HomePage(CurrentWebDriver.getInstance().getWebDriver(), getWait(), getReportLogger());
 		final String pageTitle = homePage.getTitle();
 		final String expectedPageTitle = "Randall Reilly";
 
@@ -23,8 +23,8 @@ public class HomeTest extends BaseTest {
 	}
 
 	@Test (dataProvider = "menuWithUrlsDataProvider", dataProviderClass = MainDataProvider.class)
-	public void openTalentIntelligenceLinks(TalentIntelligenceNavbarSubMenu submenu, String expectedUrl){
-		final HomePage homePage = new HomePage(CurrentWebDriver.getInstance().getWebDriver(), getWait());
+	public void openTalentIntelligenceLinksTest(TalentIntelligenceNavbarSubMenu submenu, String expectedUrl){
+		final HomePage homePage = new HomePage(CurrentWebDriver.getInstance().getWebDriver(), getWait(), getReportLogger());
 
 		homePage.getNavbar().openTalentIntelligenceSubMenu(submenu);
 		assertEquals(homePage.getUrl(), expectedUrl);

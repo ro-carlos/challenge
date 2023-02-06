@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.challenge.pages.BasePage;
 import com.challenge.pages.menu.NavbarMenu;
 import com.challenge.pages.menu.TalentIntelligenceNavbarSubMenu;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 
 public class HomePageNavbar extends BasePage {
@@ -25,15 +27,19 @@ public class HomePageNavbar extends BasePage {
 			NavbarMenu.ABOUT, getLocator(WEB_MENU_TEMPLATE, NavbarMenu.ABOUT.getName()),
 			NavbarMenu.CONTACT_US, getLocator(WEB_MENU_TEMPLATE, NavbarMenu.CONTACT_US.getName()));
 
-	public HomePageNavbar(WebDriver driver, WebDriverWait wait) {
-		super(driver, wait);
+	public HomePageNavbar(WebDriver driver, WebDriverWait wait, ExtentTest reportsLogger) {
+		super(driver, wait, reportsLogger);
 	}
 
 	public void openTalentIntelligenceSubMenu(TalentIntelligenceNavbarSubMenu submenu){
 		var menuLocator = webMenu.get(NavbarMenu.TALENT_INTELLIGENCE);
 		var subMenuLocator = getLocator(WEB_SUB_MENU_TEMPLATE, submenu.getName());
 
+		getLogger().info("Navigating to subMenu: " + submenu.getName());
+		getReportsLogger().log(LogStatus.INFO,"Hovering menu " + NavbarMenu.TALENT_INTELLIGENCE.getName());
 		getActions().hoverElement(menuLocator);
+
+		getReportsLogger().log(LogStatus.INFO,"Clicking subMenu " + submenu.getName());
 		getActions().waitAndClick(subMenuLocator);
 	}
 

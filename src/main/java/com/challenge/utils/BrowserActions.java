@@ -25,6 +25,11 @@ public class BrowserActions {
 		return waitElementForVisibility(element).getText();
 	}
 
+	public void waitPageLoaded(){
+		getWait().until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals(
+				"complete"));
+	}
+
 	public WebElement waitElementForVisibility(WebElement element){
 		return getWait().until(ExpectedConditions.visibilityOf(element));
 	}
