@@ -19,7 +19,7 @@ import com.challenge.dataprovider.MainDataProvider;
 public class HomeTest extends BaseTest {
 
 	@Test
-	public void verifyTitlePageTest() {
+	public void verifyPageTitleTest() {
 		final HomePage homePage = new HomePage(CurrentWebDriverManager.getInstance().getWebDriver(), getWait(), getReportLogger());
 		final String pageTitle = homePage.getTitle();
 		final String expectedPageTitle = "Randall Reilly";
