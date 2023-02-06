@@ -1,7 +1,7 @@
 <br/>
 <p align="center">
   <a href="https://github.com/ro-carlos/challenge">
-    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="Logo" width="80" height="80">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Selenium_Logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Challenge</h3>
