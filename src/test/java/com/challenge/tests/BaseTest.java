@@ -46,20 +46,20 @@ public class BaseTest {
 				"Setting up browser: " + browser.getName());
 		ExtentReportsManager.getInstance().getExtentTest().log(LogStatus.INFO, "Test has started");
 
-		CurrentWebDriver.getInstance().setWebDriver(WebDriverFactory.getDriver(browser));
-		waitThreadLocal.set(new WebDriverWait(CurrentWebDriver.getInstance().getWebDriver(),
+		CurrentWebDriverManager.getInstance().setWebDriver(WebDriverFactory.getDriver(browser));
+		waitThreadLocal.set(new WebDriverWait(CurrentWebDriverManager.getInstance().getWebDriver(),
 				Duration.ofSeconds(Long.parseLong(propertiesReader.getProperty("timeout")))));
-		CurrentWebDriver.getInstance().getWebDriver().manage().window().maximize();
-		CurrentWebDriver.getInstance().getWebDriver().get(propertiesReader.getProperty("baseUrl"));
+		CurrentWebDriverManager.getInstance().getWebDriver().manage().window().maximize();
+		CurrentWebDriverManager.getInstance().getWebDriver().get(propertiesReader.getProperty("baseUrl"));
 	}
 
 	@AfterMethod(alwaysRun = true)
 	public void tearDown(ITestResult result) {
 		getLogger().info("Closing browser");
 		getLogger().info("TearDown ThreadId: " + Thread.currentThread().getId());
-		if (CurrentWebDriver.getInstance().getWebDriver() != null) {
-			CurrentWebDriver.getInstance().getWebDriver().quit();
-			CurrentWebDriver.getInstance().removeWebDriver();
+		if (CurrentWebDriverManager.getInstance().getWebDriver() != null) {
+			CurrentWebDriverManager.getInstance().getWebDriver().quit();
+			CurrentWebDriverManager.getInstance().removeWebDriver();
 		}
 		setResults(result);
 	}

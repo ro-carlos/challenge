@@ -5,6 +5,11 @@ import org.testng.annotations.DataProvider;
 import com.challenge.pages.menu.TalentIntelligenceNavbarSubMenu;
 
 
+/**
+ * Data provider class for test cases
+ *
+ * @author Carlos Rodríguez
+ */
 public class MainDataProvider {
 
 	@DataProvider (name = "menuWithUrlsDataProvider", parallel = true)

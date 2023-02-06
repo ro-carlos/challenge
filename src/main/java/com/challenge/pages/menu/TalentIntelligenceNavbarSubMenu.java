@@ -1,5 +1,10 @@
 package com.challenge.pages.menu;
 
+/**
+ * Enum class containing Talent Intelligence navbar submenu
+ *
+ * @author Carlos Rodríguez
+ */
 public enum TalentIntelligenceNavbarSubMenu {
 	OVERVIEW("Overview"),
 	TECHNOLOGIES("Technologies"),

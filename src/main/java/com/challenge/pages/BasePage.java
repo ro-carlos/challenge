@@ -7,19 +7,22 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.challenge.report.ExtentReportsManager;
 import com.challenge.utils.BrowserActions;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 
+/**
+ * Base class that contains common configuration for another pages.
+ *
+ * @author Carlos Rodríguez
+ */
 public class BasePage {
 	private final WebDriver driver;
 	private final WebDriverWait wait;
 	private final ExtentTest reportsLogger;
 	private final BrowserActions browserActions;
 	private static final Logger logger = LogManager.getLogger();
-	//private static final ExtentTest reportsLogger = ExtentReportsManager.getInstance().getExtentTest();
 
 	@FindBy(css = "body")
 	private WebElement bodyElement;
@@ -41,20 +44,28 @@ public class BasePage {
 		return url;
 	}
 
+	/**
+	 * Waits until page is loaded by checking page state using javascript
+	 *
+	 */
+	protected void waitPageLoaded(){
+		getActions().waitPageLoaded();
+	}
+
+	/**
+	 * Waits until page is loaded by checking expected element
+	 *
+	 */
+	protected void pageLoadedElement(){
+		getActions().waitElementForVisibility(bodyElement);
+	}
+
 	protected WebDriver getDriver() {
 		return driver;
 	}
 
 	protected WebDriverWait getWait() {
 		return wait;
-	}
-
-	protected void waitPageLoaded(){
-		getActions().waitPageLoaded();
-	}
-
-	protected void pageLoadedElement(){
-		getActions().waitElementForVisibility(bodyElement);
 	}
 
 	protected BrowserActions getActions(){

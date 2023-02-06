@@ -10,7 +10,11 @@ import org.testng.annotations.Test;
 
 import com.challenge.dataprovider.MainDataProvider;
 
-
+/**
+ * Test class containing simple test case
+ *
+ * @author Carlos Rodríguez
+ */
 public class CodingChallengeTest {
 
 	@Test (dataProvider = "codingChallengeDataProvider", dataProviderClass = MainDataProvider.class)

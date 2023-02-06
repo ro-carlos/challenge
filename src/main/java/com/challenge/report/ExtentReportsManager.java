@@ -5,7 +5,11 @@ package com.challenge.report;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 
-
+/**
+ * Reports class instance to log data from test executions to feed report
+ *
+ * @author Carlos Rodríguez
+ */
 public class ExtentReportsManager {
 	private static ExtentReportsManager instance;
 	private static ExtentReports report;

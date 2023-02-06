@@ -7,6 +7,14 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
+/**
+ * Browser actions is a class to perform actions on
+ * {@link WebElement} using {@link WebDriverWait}
+ *
+ * @author Carlos Rodriguez
+ *
+ */
 public class BrowserActions {
 
 	private final WebDriver driver;
@@ -21,24 +29,42 @@ public class BrowserActions {
 		this.actions = new Actions(this.driver);
 	}
 
-	public String getText(WebElement element){
-		return waitElementForVisibility(element).getText();
-	}
-
+	/**
+	 * Waits until page is loaded by checking page state using javascript
+	 *
+	 */
 	public void waitPageLoaded(){
 		getWait().until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals(
 				"complete"));
 	}
 
+	/**
+	 * Waits until web element is visible
+	 * @param element {@link WebElement}
+	 *
+	 * @return {@link WebElement} retrieves web element
+	 */
 	public WebElement waitElementForVisibility(WebElement element){
 		return getWait().until(ExpectedConditions.visibilityOf(element));
 	}
 
+	/**
+	 * Waits until locator is visible
+	 * @param locator {@link By}
+	 *
+	 * @return {@link WebElement} retrieves web element
+	 */
 	public WebElement waitLocatorForVisibility(By locator){
 		getWait().until(ExpectedConditions.visibilityOfElementLocated(locator));
 		return getDriver().findElement(locator);
 	}
 
+	/**
+	 * Checks locator visibility
+	 * @param locator {@link By}
+	 *
+	 * @return {@code true} if locator is present, {@code false} otherwise
+	 */
 	public boolean isLocatorPresent(By locator){
 		try {
 			return waitLocatorForVisibility(locator).isDisplayed();
@@ -48,34 +74,51 @@ public class BrowserActions {
 		return false;
 	}
 
+	/**
+	 * Retrieves text in web element
+	 * @param element {@link WebElement}
+	 *
+	 * @return {@link String} retrieves web element text
+	 */
+	public String getText(WebElement element){
+		return waitElementForVisibility(element).getText();
+	}
+
+	/**
+	 * Waits for locator visibility and then clicks it
+	 * @param locator {@link By}
+	 *
+	 */
 	public void waitAndClick(By locator){
 		waitAndClick(waitLocatorForVisibility(locator));
 	}
 
-
+	/**
+	 * Clicks on a web element
+	 * @param element {@link WebElement}
+	 *
+	 */
 	public void waitAndClick(WebElement element){
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 		element.click();
 	}
 
+	/**
+	 * Waits until locator is present and then hovers on it
+	 * @param locator {@link By}
+	 *
+	 */
 	public void hoverElement(By locator){
 		hoverElement(waitLocatorForVisibility(locator));
 	}
 
+	/**
+	 * Performs hover on a web element
+	 * @param element {@link WebElement}
+	 *
+	 */
 	public void hoverElement(WebElement element){
 		getActions().moveToElement(element).perform();
-	}
-
-	public void switchToIframe(WebElement iframe){
-		getDriver().switchTo().frame(iframe);
-	}
-
-	public void switchToIframe(String iframe){
-		getDriver().switchTo().frame(iframe);
-	}
-
-	public void switchToIframe(int iframe){
-		getDriver().switchTo().frame(iframe);
 	}
 
 	protected WebDriver getDriver(){

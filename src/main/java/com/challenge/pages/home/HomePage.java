@@ -6,11 +6,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.challenge.pages.BasePage;
-import com.challenge.report.ExtentReportsManager;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 
+/**
+ * Main page of app
+ *
+ * @author Carlos Rodríguez
+ */
 public class HomePage extends BasePage {
 
 	@FindBy(css = ".site-logo > a")
@@ -28,12 +32,22 @@ public class HomePage extends BasePage {
 		getActions().waitElementForVisibility(logo);
 	}
 
+	/**
+	 * Retrieves page title text
+	 *
+	 * @return {@link String}
+	 */
 	public String getTitle(){
 		getLogger().info("Returning home page title");
 		getReportsLogger().log(LogStatus.INFO,"Returning home page title");
 		return getActions().getText(title);
 	}
 
+	/**
+	 * Retrieves navbar instance
+	 *
+	 * @return {@link HomePageNavbar}
+	 */
 	public HomePageNavbar getNavbar(){
 		getReportsLogger().log(LogStatus.INFO,"Getting home page navbar");
 		return new HomePageNavbar(getDriver(), getWait(), getReportsLogger());

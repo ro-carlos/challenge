@@ -1,5 +1,10 @@
 package com.challenge.pages.menu;
 
+/**
+ * Enum class containing navbar menu
+ *
+ * @author Carlos Rodríguez
+ */
 public enum NavbarMenu {
 	TALENT_INTELLIGENCE("Talent Intelligence"),
 	ASSET_INTELLIGENCE("Asset Intelligence"),

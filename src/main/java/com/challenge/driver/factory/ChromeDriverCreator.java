@@ -6,7 +6,11 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import com.challenge.utils.PropertiesReader;
 
-
+/**
+ * Chrome driver creator class
+ *
+ * @author Carlos Rodríguez
+ */
 public class ChromeDriverCreator extends WebDriverCreator {
 	@Override
 	public WebDriver createWebDriver() {

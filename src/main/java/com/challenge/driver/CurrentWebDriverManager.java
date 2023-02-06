@@ -2,20 +2,24 @@ package com.challenge.driver;
 
 import org.openqa.selenium.WebDriver;
 
-
-public class CurrentWebDriver {
-	private static CurrentWebDriver instance;
+/**
+ * Web driver class instance to manage driver sessions
+ *
+ * @author Carlos Rodríguez
+ */
+public class CurrentWebDriverManager {
+	private static CurrentWebDriverManager instance;
 	private static ThreadLocal<WebDriver> webDriverThreadLocal;
 
-	private CurrentWebDriver() {
+	private CurrentWebDriverManager() {
 		webDriverThreadLocal = new ThreadLocal<>();
 	}
 
-	public static CurrentWebDriver getInstance(){
+	public static CurrentWebDriverManager getInstance(){
 		if (instance == null){
-			synchronized (CurrentWebDriver.class){
+			synchronized (CurrentWebDriverManager.class){
 				if (instance == null){
-					instance = new CurrentWebDriver();
+					instance = new CurrentWebDriverManager();
 				}
 			}
 		}

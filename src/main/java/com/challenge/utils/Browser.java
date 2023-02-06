@@ -1,5 +1,10 @@
 package com.challenge.utils;
 
+/**
+ * Enum that represents different browsers for framework
+ *
+ * @author Carlos Rodríguez
+ */
 public enum Browser {
 	FIREFOX("Firefox"), CHROME("Chrome");
 

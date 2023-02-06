@@ -8,6 +8,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
+/**
+ * Properties class instance to read project properties from file
+ *
+ * @author Carlos Rodríguez
+ */
 public class PropertiesReader {
 
 	private static PropertiesReader instance = null;

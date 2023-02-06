@@ -4,6 +4,11 @@ import org.openqa.selenium.WebDriver;
 
 import com.challenge.utils.Browser;
 
+/**
+ * Factory class to create different types of sessions given browser
+ *
+ * @author Carlos Rodríguez
+ */
 public class WebDriverFactory {
 
 	public static WebDriver getDriver(Browser browser) throws Exception{
