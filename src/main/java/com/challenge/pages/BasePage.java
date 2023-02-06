@@ -16,9 +16,6 @@ public class BasePage {
 	private final BrowserActions browserActions;
 	private static final Logger logger = LogManager.getLogger();
 
-	private By webMenuLocator = By.cssSelector("nav.primary-menu-wrapper");
-	private By mobileMenuLocator = By.cssSelector("div.header-titles-wrapper button[data-toggle-body-class='showing-menu-modal']");
-
 	@FindBy(css = "body")
 	private WebElement bodyElement;
 
@@ -50,14 +47,6 @@ public class BasePage {
 	protected void waitPageLoaded(){
 		getWait().until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals(
 				"complete"));
-	}
-
-	protected boolean isWebResponsive(){
-		return getActions().isLocatorPresent(webMenuLocator);
-	}
-
-	protected By getMobileMenuLocator(){
-		return  mobileMenuLocator;
 	}
 
 	protected BrowserActions getActions(){
