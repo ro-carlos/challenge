@@ -12,7 +12,7 @@ public class ExtentReportsManager {
 	private static ThreadLocal<ExtentTest> extentTestThreadLocal;
 
 	private ExtentReportsManager() {
-		report = new ExtentReports(System.getProperty("user.dir") +"/test-output/testReport.html");
+		report = new ExtentReports(System.getProperty("user.dir") +"/test-output/report/testReport.html");
 		extentTestThreadLocal = new ThreadLocal<>();
 	}
 

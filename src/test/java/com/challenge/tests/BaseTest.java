@@ -31,15 +31,19 @@ public class BaseTest {
 			browser = Browser.FIREFOX;
 		}
 		context.getCurrentXmlTest().getSuite().setParallel(XmlSuite.ParallelMode.METHODS);
-		context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(Integer.parseInt(propertiesReader.getProperty("threads")));
+		context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(
+				Integer.parseInt(propertiesReader.getProperty("threads")));
 		getLogger().info("Setup Suite ThreadId: " + Thread.currentThread().getId());
 	}
 
 	@BeforeMethod(alwaysRun = true)
 	public void setUpSuite(Method context) throws Exception {
-		ExtentReportsManager.getInstance().setExtentTest(ExtentReportsManager.getInstance().getReport().startTest(context.getName()));
+		ExtentReportsManager.getInstance().setExtentTest(
+				ExtentReportsManager.getInstance().getReport().startTest(context.getName()));
 		getLogger().info("Setup Method ThreadId: " + Thread.currentThread().getId());
-		getLogger().info("Setting up browser");
+		getLogger().info("Setting up browser: " + browser.getName());
+		ExtentReportsManager.getInstance().getExtentTest().log(LogStatus.INFO,
+				"Setting up browser: " + browser.getName());
 		ExtentReportsManager.getInstance().getExtentTest().log(LogStatus.INFO, "Test has started");
 
 		CurrentWebDriver.getInstance().setWebDriver(WebDriverFactory.getDriver(browser));
@@ -64,7 +68,7 @@ public class BaseTest {
 		return waitThreadLocal.get();
 	}
 
-	protected ExtentTest getReportLogger(){
+	protected ExtentTest getReportLogger() {
 		return ExtentReportsManager.getInstance().getExtentTest();
 	}
 
@@ -72,12 +76,12 @@ public class BaseTest {
 		return logger;
 	}
 
-	private void setResults(ITestResult result){
+	private void setResults(ITestResult result) {
 		ExtentReportsManager extentReportsManager = ExtentReportsManager.getInstance();
 
-		if(result.getStatus() == ITestResult.FAILURE) {
+		if (result.getStatus() == ITestResult.FAILURE) {
 			extentReportsManager.getExtentTest().log(LogStatus.FAIL, "Test has failed");
-		} else if(result.getStatus() == ITestResult.SUCCESS) {
+		} else if (result.getStatus() == ITestResult.SUCCESS) {
 			extentReportsManager.getExtentTest().log(LogStatus.PASS, "Test has passed");
 		} else {
 			extentReportsManager.getExtentTest().log(LogStatus.SKIP, "Test has been skipped");
