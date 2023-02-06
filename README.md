@@ -27,7 +27,6 @@
   * [Installation](#installation)
 * [Usage](#usage)
 * [Authors](#authors)
-* [Acknowledgements](#acknowledgements)
 
 ## About The Project
 
@@ -49,7 +48,7 @@ Install Java 11.
 
 * java
 
-_Check Oracle, please refer to the [Java Versions](https://www.oracle.com/database/technologies/oracle-database-software-downloads.html)_
+_Check Oracle, please refer to the [Java Versions](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html)_
 
 ### Installation
 
