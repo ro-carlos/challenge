@@ -30,7 +30,7 @@
 
 ## About The Project
 
-![Screen Shot](https://lh4.googleusercontent.com/XMBC-A9bU7FcXtmw99Yhz-rJvCH-SBa6Pmcy2EZBXf-pCTG4sIO0QJS0CjrjM8Rne44=w2400)
+![Screen Shot](https://drive.google.com/uc?export=view&id=1Ioi2nQvrn--pz3Tq1_3RW5Riq4K8AVpX)
 
 This is an automation framework to run test cases using selenium and java.
 
