@@ -120,7 +120,6 @@ public class BrowserActions {
 	public void hoverElement(WebElement element){
 		getActions().moveToElement(element).perform();
 	}
-
 	protected WebDriver getDriver(){
 		return driver;
 	}
@@ -137,4 +136,7 @@ public class BrowserActions {
 		return logger;
 	}
 
+	public void setText(WebElement element, CharSequence key) {
+		element.sendKeys(key);
+	}
 }
