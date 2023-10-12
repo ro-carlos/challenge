@@ -13,4 +13,7 @@ public interface RestAssuredClient {
 
 	Response sendPostRequest(RequestSpecification requestSpecification, int statusCode);
 
+	Response sendPutRequest(RequestSpecification requestSpecification, int statusCode);
+
+	Response sendDeleteRequest(RequestSpecification requestSpecification, int statusCode);
 }

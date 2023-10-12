@@ -24,14 +24,26 @@ public abstract class BaseRequest implements RestAssuredClient {
 					.setParam("http.connection.timeout", Integer.parseInt(propertiesReader.getProperty("apiTimeout"))));
 
 	@Override
+	public Response sendPostRequest(RequestSpecification requestSpecification, int statusCode) {
+		return given().config(config).spec(requestSpecification).when().post().then().statusCode(
+				statusCode).extract().response();
+	}
+
+	@Override
 	public Response sendGetRequest(RequestSpecification requestSpecification, int statusCode) {
 		return given().config(config).spec(requestSpecification).when().get().then().statusCode(
 				statusCode).extract().response();
 	}
 
 	@Override
-	public Response sendPostRequest(RequestSpecification requestSpecification, int statusCode) {
-		return given().config(config).spec(requestSpecification).when().post().then().statusCode(
+	public Response sendPutRequest(RequestSpecification requestSpecification, int statusCode) {
+		return given().config(config).spec(requestSpecification).when().put().then().statusCode(
+				statusCode).extract().response();
+	}
+
+	@Override
+	public Response sendDeleteRequest(RequestSpecification requestSpecification, int statusCode) {
+		return given().config(config).spec(requestSpecification).when().delete().then().statusCode(
 				statusCode).extract().response();
 	}
 }

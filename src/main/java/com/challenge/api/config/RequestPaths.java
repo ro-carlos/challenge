@@ -6,8 +6,8 @@ package com.challenge.api.config;
  * @author Carlos Rodríguez
  */
 public enum RequestPaths {
-	BOOKS("books"),
-	BOOK_BY_BOOK_ABBR(BOOKS.getPath() + "/{bookAbbr}");
+	PET("pet"),
+	PET_BY_ID(PET.getPath() + "/{petId}");
 
 	private final String requestPath;
 
