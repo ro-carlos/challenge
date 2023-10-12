@@ -5,9 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.challenge.pages.BasePage;
-import com.challenge.pages.home.HomePageNavbar;
 import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
 
 
 /**
@@ -33,7 +31,7 @@ public class GoogleHomePage extends BasePage {
 	}
 
 	/**
-	 * Retrieves navbar instance
+	 * Search results for a given text
 	 *
 	 * @return {@link GoogleResultPage}
 	 */

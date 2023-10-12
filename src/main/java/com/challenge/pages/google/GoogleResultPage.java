@@ -8,18 +8,19 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.challenge.pages.BasePage;
+import com.challenge.pages.wikipedia.HomeWikipediaPage;
 import com.relevantcodes.extentreports.ExtentTest;
 
 
 /**
- * Main page of app
+ * Results page
  *
  * @author Carlos Rodríguez
  */
 public class GoogleResultPage extends BasePage {
 
 	@FindBy(id = "search")
-	private WebElement searchResultsDiv;
+	private WebElement searchResultsContainer;
 
 	@FindBy(css = "#search > div  h3")
 	private List<WebElement> searchResults;
@@ -31,15 +32,28 @@ public class GoogleResultPage extends BasePage {
 
 	@Override
 	protected void pageLoadedElement() {
-		getActions().waitElementForVisibility(searchResultsDiv);
+		getActions().waitElementForVisibility(searchResultsContainer);
 	}
 
+	/**
+	 * Retrieves the number of results
+	 *
+	 * @return {@code int}
+	 */
 	public int getResults(){
 		return searchResults.size();
 	}
 
-	public void clickResult(){
-		searchResults.get(0).click();
+	/**
+	 * Clicks on specific result
+	 *
+	 * @param index {@code int]
+	 *
+	 * @return {@link HomeWikipediaPage}
+	 */
+	public HomeWikipediaPage clickResult(int index){
+		getActions().waitAndClick(searchResults.get(index));
+		return new HomeWikipediaPage(getDriver(), getWait(), getReportsLogger());
 	}
 
 

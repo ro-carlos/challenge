@@ -1,7 +1,6 @@
 package com.challenge.tests.ui.google;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 import org.testng.annotations.Test;
 
@@ -9,8 +8,7 @@ import com.challenge.dataprovider.MainDataProvider;
 import com.challenge.driver.CurrentWebDriverManager;
 import com.challenge.pages.google.GoogleHomePage;
 import com.challenge.pages.google.GoogleResultPage;
-import com.challenge.pages.home.HomePage;
-import com.challenge.pages.menu.NavbarMenu;
+import com.challenge.pages.wikipedia.HomeWikipediaPage;
 import com.challenge.tests.BaseTest;
 import com.challenge.utils.TestInfo;
 import com.challenge.utils.TestType;
@@ -24,27 +22,23 @@ import com.challenge.utils.TestType;
 @TestInfo(testType = TestType.WEB)
 public class GoogleHomeTest extends BaseTest {
 
-	@Test
-	public void verifyNonEmptyResults() {
+	@Test (dataProvider = "searchResultGoogleDataProvider", dataProviderClass = MainDataProvider.class)
+	public void verifyNonEmptyResults(String text) {
 		final GoogleHomePage homePage = new GoogleHomePage(CurrentWebDriverManager.getInstance().getWebDriver(), getWait(), getReportLogger());
-		final String text = "Wikipedia";
 
 		GoogleResultPage resultPage = homePage.search(text);
-		assertTrue(resultPage.getResults() > 0, "There are valid result");
-		//assertEquals(pageTitle, expectedPageTitle);
+		assertTrue(resultPage.getResults() > 0, "Results page has valid results");
 	}
 
-	@Test
-	public void verifyFirstResult() {
+	@Test (dataProvider = "searchResultGoogleWithUrlDataProvider", dataProviderClass = MainDataProvider.class)
+	public void verifyFirstResultUrl(String text, String expectedUrl) {
 		final GoogleHomePage homePage = new GoogleHomePage(CurrentWebDriverManager.getInstance().getWebDriver(), getWait(), getReportLogger());
-		final String text = "Wikipedia";
-		final String expectedUrl = "https://es.wikipedia.org/";
 
 		GoogleResultPage resultPage = homePage.search(text);
-		resultPage.clickResult();
+		HomeWikipediaPage homeWikipediaPage = resultPage.clickResult(0);
 
-		assertTrue(resultPage.getUrl().contains(expectedUrl), "There are valid result");
-		//assertEquals(pageTitle, expectedPageTitle);
+		assertTrue(homeWikipediaPage.getUrl().contains(expectedUrl), "Url is valid");
+		assertFalse(homeWikipediaPage.getTitle().isBlank(), "Header text is not empty");
 	}
 
 }

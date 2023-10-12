@@ -120,6 +120,18 @@ public class BrowserActions {
 	public void hoverElement(WebElement element){
 		getActions().moveToElement(element).perform();
 	}
+
+	/**
+	 * Adds text to web element
+	 *
+	 * @param element {@link WebElement}
+	 * @param charSequence {@link CharSequence}
+	 */
+	public void setText(WebElement element, CharSequence charSequence) {
+		wait.until(ExpectedConditions.visibilityOf(element));
+		element.sendKeys(charSequence);
+	}
+
 	protected WebDriver getDriver(){
 		return driver;
 	}
@@ -134,9 +146,5 @@ public class BrowserActions {
 
 	protected Logger getLogger(){
 		return logger;
-	}
-
-	public void setText(WebElement element, CharSequence key) {
-		element.sendKeys(key);
 	}
 }

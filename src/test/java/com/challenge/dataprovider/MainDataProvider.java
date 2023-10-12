@@ -1,37 +1,28 @@
 package com.challenge.dataprovider;
 
-import com.challenge.pages.menu.NavbarMenu;
 import org.testng.annotations.DataProvider;
 
 
 /**
- * Data provider class for test
+ * Data provider class for tests
  *
  * @author Carlos Rodríguez
  */
 public class MainDataProvider {
 
-	@DataProvider (name = "menuWithUrlsDataProvider", parallel = true)
-	public static Object[][] menuWithUrlsDataProvider() {
+	@DataProvider (name = "searchResultGoogleDataProvider", parallel = true)
+	public static Object[][] searchResultGoogleDataProvider() {
 		return new Object [][] {
-				{ NavbarMenu.MAIN_PAGE, "https://en.wikipedia.org/wiki/Main_Page" },
-				{ NavbarMenu.CONTENTS, "https://en.wikipedia.org/wiki/Wikipedia:Contents" },
-				{ NavbarMenu.CURRENT_EVENTS, "https://en.wikipedia.org/wiki/Portal:Current_events" },
-				{ NavbarMenu.ABOUT_WIKIPEDIA, "https://en.wikipedia.org/wiki/Wikipedia:About" }
+				{ "Wikipedia" },
+				{ "wiki" }
 		};
 	}
 
-	@DataProvider (name = "apiUserDataProvider", parallel = true)
-	public static Object[][] apiUserDataProvider() {
+	@DataProvider (name = "searchResultGoogleWithUrlDataProvider", parallel = true)
+	public static Object[][] searchResultGoogleWithUrlDataProvider() {
 		return new Object [][] {
-				{ "sl" }, { "gn" }
-		};
-	}
-
-	@DataProvider (name = "codingChallengeDataProvider", parallel = true)
-	public static Object[][] codingChallengeDataProvider() {
-		return new Object [][] {
-				{ "Thanks", "For", "Attempting", "A", "Randall", "Reilly", "Coding", "Challenge" }
+				{ "Wikipedia", "https://es.wikipedia.org/" },
+				{ "cr7 wikipedia", "https://es.wikipedia.org/" }
 		};
 	}
 }
